@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLForInterfaces", "BLForTankGaming\BLForInterfaces.csproj", "{654AAA3C-478A-4DBD-9AB4-8B5374D4FCF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLForGaming", "BLForGaming\BLForGaming.csproj", "{03E8A1CC-D7AB-4EF4-B541-2C8C59AD5301}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLClassesForGame", "BLForGaming\BLClassesForGame.csproj", "{03E8A1CC-D7AB-4EF4-B541-2C8C59AD5301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

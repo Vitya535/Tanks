@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="IArtifactsOnField.cs" />
     <Compile Include="ICartridges.cs" />
-    <Compile Include="ICartridgesOnField.cs" />
     <Compile Include="IForGame.cs" />
     <Compile Include="IObjectsOnField.cs" />
     <Compile Include="IObstaclesOnField.cs" />

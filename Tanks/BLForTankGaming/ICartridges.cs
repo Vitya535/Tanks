@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BLForInterfaces
 {
-    interface ICartridges // интерфейс, описывающий снаряды, не забыть паттерн "Цепочка обязанностей"
+    public interface ICartridges // интерфейс, описывающий снаряды, не забыть паттерн "Цепочка обязанностей"
     {
         int GetDamage { get; } // урон снаряда
-        int GetRange { get; } // дальность измеряется в клетках
+        int GetRange { get; } // дальность измеряется в клетках (или в иксах и игреках)
         // должен быть еще тип снаряда в виде enum, но он будет в классе
     }
 }

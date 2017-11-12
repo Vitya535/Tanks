@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BLForInterfaces;
 using System.Drawing;
 
-namespace BLForGaming
+namespace BLClassesForGame
 {
     class DestructibleObstacle : IObstaclesOnField // класс разрушаемых препятствий
     {
