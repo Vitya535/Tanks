@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLForTankGaming
+namespace BLForInterfaces
 {
     interface IForGame // интерфейс для игры, не забыть про паттерн "Одиночка", "Хранитель"
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLForTankGaming
+namespace BLForInterfaces
 {
-    interface IObstaclesOnField : IObjectsOnField // интерфейс для препятствий
+    public interface IObstaclesOnField : IObjectsOnField // интерфейс для препятствий
     {
-        int Health { get; } // здоровье препятствия (если оно есть), если оно неразрушимое значит будет значение NaN, или что-то вроде этого
+        int Health { get; } // здоровье препятствия (если оно есть), если оно неразрушимое значит будет значение NaN (или просто ноль), или что-то вроде этого
     }
 }

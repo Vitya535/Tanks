@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLForTankGaming
+namespace BLForInterfaces
 {
     interface ITanks : IObjectsOnField // интерфейс для танков, не забыть паттерн "Состояние", "Стратегия", "Строитель"
     {

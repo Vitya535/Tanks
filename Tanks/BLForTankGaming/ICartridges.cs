@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLForTankGaming
+namespace BLForInterfaces
 {
     interface ICartridges // интерфейс, описывающий снаряды, не забыть паттерн "Цепочка обязанностей"
     {

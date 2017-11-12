@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLForTankGaming
+namespace BLForInterfaces
 {
     interface IArtifactsOnField : IObjectsOnField // скорей всего метод должен быть статическим, интерфейс для артефактов на поле, паттерн "Адаптер" не забыть
     {
