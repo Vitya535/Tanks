@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BLForInterfaces
 {
-    interface IArtifactsOnField : IObjectsOnField // скорей всего метод должен быть статическим, интерфейс для артефактов на поле, паттерн "Адаптер" не забыть
+    public interface IArtifactsOnField : IObjectsOnField // скорей всего метод должен быть статическим, интерфейс для артефактов на поле, паттерн "Адаптер" не забыть
     {
-        //void CauseEffect(Tank tank); // эффект, оказываемый артефактом на танк
+        void CauseEffect(); // эффект, оказываемый артефактом на танк
     }
 }

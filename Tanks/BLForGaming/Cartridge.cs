@@ -8,9 +8,8 @@ using System.Drawing;
 
 namespace BLClassesForGame
 {
-    abstract class Cartridge : ICartridges
+    abstract partial class Cartridge : ICartridges // использовать паттерн "Цепочка обязанностей" (если он будет вообще нужен)
     {
-        public enum TypeOfCartridges { Light, Medium, Heavy } // перечисляемый тип для типов снарядов, мне кажется надо будет здесь поправить дело с доступом
         protected TypeOfCartridges Type { get; set; } // тип снарядов
         public int GetDamage { get { return damage; } } // урон снарядов
         public int GetRange { get { return range; } } // дальность снарядов
@@ -23,6 +22,8 @@ namespace BLClassesForGame
             damage = dmg;
             range = ranged;
         }
+
+        // возможно здесь должен быть метод что-то вроде "нанести урон" для паттерна "цепочка обязанностей" (или этот метод должен быть у игры?)
     }
 
 

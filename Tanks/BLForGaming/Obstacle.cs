@@ -19,17 +19,16 @@ namespace BLClassesForGame
         public int Health { get { return health; } }
         public Image GetObjectImage { get { return objectImage; } }
 
-        public Obstacles(int obstX, int obstY, Image image)
+        public Obstacles(int obstX, int obstY)
         {
             x = obstX;
             y = obstY;
-            objectImage = image;
         }
     }
 
     class DestructibleObstacle : Obstacles// класс разрушаемых препятствий
     {
-        public DestructibleObstacle(int obstX, int obstY, Image image) : base(obstX, obstY, image)
+        public DestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
             health = 100;
         }
@@ -37,7 +36,7 @@ namespace BLClassesForGame
 
     class UnDestructibleObstacle : Obstacles// класс неразрушимых препятствий
     {
-        public UnDestructibleObstacle(int obstX, int obstY, Image image) : base(obstX, obstY, image)
+        public UnDestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
             health = 0;
         }
