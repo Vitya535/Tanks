@@ -20,5 +20,8 @@ namespace BLForGaming
         public Image GetObjectImage { get { return image; } }
         public int GetHealth { get { return health; } }
         public int GetMoveSpeed { get { return movementSpeed; } }
+        public Cartridge CartridgeForTank { get; private set; }
+        public List<Artifact> HaveArtifacts { get; private set; }
+        // еще переменная, отвечающая за стратегию
     }
 }

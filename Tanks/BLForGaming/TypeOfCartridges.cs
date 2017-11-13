@@ -1,6 +1,6 @@
 ﻿using BLForInterfaces;
 
-namespace BLClassesForGame
+namespace BLForGaming
 {
     abstract partial class Cartridge : ICartridges // использовать паттерн "Цепочка обязанностей" (если он будет вообще нужен)
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BLForInterfaces;
 using System.Drawing;
 
-namespace BLClassesForGame
+namespace BLForGaming
 {
     abstract class Obstacles : IObstaclesOnField
     {

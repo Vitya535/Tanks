@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using BLForInterfaces;
 using System.Drawing;
 
-namespace BLClassesForGame
+namespace BLForGaming
 {
-    abstract partial class Cartridge : ICartridges // использовать паттерн "Цепочка обязанностей" (если он будет вообще нужен)
+    public abstract partial class Cartridge : ICartridges // использовать паттерн "Цепочка обязанностей" (если он будет вообще нужен)
     {
         protected TypeOfCartridges Type { get; set; } // тип снарядов
         public int GetDamage { get { return damage; } } // урон снарядов
