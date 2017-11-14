@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLForGaming
+namespace BLForTankGame
 {
-    class GameField
+    public class GameField : IGameField
     {
         private static GameField instance;
         // по поводу полей, свойств пока точно не знаю

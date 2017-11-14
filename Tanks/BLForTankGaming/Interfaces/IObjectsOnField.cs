@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace BLForInterfaces
+namespace BLForTankGame
 {
     public interface IObjectsOnField // интерфейс, описывающий все обьекты, присутствующие на поле
     {

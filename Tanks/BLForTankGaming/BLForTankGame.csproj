@@ -41,12 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IArtifactsOnField.cs" />
-    <Compile Include="ICartridges.cs" />
-    <Compile Include="IObjectsOnField.cs" />
-    <Compile Include="IObstaclesOnField.cs" />
-    <Compile Include="ITanks.cs" />
+    <Compile Include="Classes\Artifact.cs" />
+    <Compile Include="Classes\Cartridge.cs" />
+    <Compile Include="Classes\Game.cs" />
+    <Compile Include="Classes\GameField.cs" />
+    <Compile Include="Interfaces\IArtifactsOnField.cs" />
+    <Compile Include="Interfaces\ICartridges.cs" />
+    <Compile Include="Interfaces\IGame.cs" />
+    <Compile Include="Interfaces\IGameField.cs" />
+    <Compile Include="Interfaces\IObjectsOnField.cs" />
+    <Compile Include="Interfaces\IObstaclesOnField.cs" />
+    <Compile Include="Interfaces\ITanks.cs" />
+    <Compile Include="Classes\Obstacle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Classes\Tank.cs" />
+    <Compile Include="Classes\TypeOfCartridges.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

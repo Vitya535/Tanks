@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLForInterfaces
+namespace BLForTankGame
 {
     public interface IObstaclesOnField : IObjectsOnField // интерфейс для препятствий
     {
