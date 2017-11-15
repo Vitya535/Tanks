@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Artifact.cs" />
+    <Compile Include="Classes\AttackStrategy.cs" />
     <Compile Include="Classes\Cartridge.cs" />
+    <Compile Include="Classes\DefenseStrategy.cs" />
     <Compile Include="Classes\Game.cs" />
     <Compile Include="Classes\GameField.cs" />
     <Compile Include="Interfaces\IArtifactsOnField.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="Interfaces\IGameField.cs" />
     <Compile Include="Interfaces\IObjectsOnField.cs" />
     <Compile Include="Interfaces\IObstaclesOnField.cs" />
+    <Compile Include="Interfaces\IStrategy.cs" />
     <Compile Include="Interfaces\ITanks.cs" />
     <Compile Include="Classes\Obstacle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

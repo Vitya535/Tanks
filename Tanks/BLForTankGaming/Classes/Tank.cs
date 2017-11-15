@@ -19,8 +19,13 @@ namespace BLForTankGame
         public Image GetObjectImage { get { return image; } }
         public int GetHealth { get { return health; } }
         public int GetMoveSpeed { get { return movementSpeed; } }
-        public Cartridge CartridgeForTank { get; private set; }
-        public List<Artifact> HaveArtifacts { get; private set; }
-        // еще переменная, отвечающая за стратегию
+        public Cartridge TankCartridge { get; private set; }
+        public List<Artifact> Artifacts { get; private set; }
+        public IStrategy Strategy { private get; set; }
+
+        public void UseStrategy()
+        {
+            Strategy.TacticAlgorithm();
+        }
     }
 }

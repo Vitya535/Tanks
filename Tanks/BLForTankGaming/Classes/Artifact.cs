@@ -22,7 +22,7 @@ namespace BLForTankGame
             y = artY;
         }
 
-        public virtual void CauseEffect()
+        public virtual void CauseEffect(Tank tank)
         { }// ???? как оказать эффект на танк?
     }
 
@@ -31,9 +31,10 @@ namespace BLForTankGame
         public RepairKit(int artX, int artY) : base(artX, artY)
         {  }
 
-        public override void CauseEffect()
+        public override void CauseEffect(Tank tank)
         {
-            base.CauseEffect();
+            tank.Artifacts.Add(); // добавить тот артефакт, который стоит на этих координатах
+            tank. // с модификаторами доступа разобраться (к характеристикам не могу добраться)
             // какой-то эффект на танке (пока не реализован класс танка)
         }
     }
@@ -43,9 +44,10 @@ namespace BLForTankGame
         public IncreaseDamage(int artX, int artY) : base(artX, artY)
         { }
 
-        public override void CauseEffect()
+        public override void CauseEffect(Tank tank)
         {
-            base.CauseEffect();
+            tank.Artifacts.Add(); // добавить тот артефакт, который стоит на этих координатах
+            // с модификаторами доступа разобраться (к характеристикам не могу добраться)
             // какой-то эффект на танке (пока не реализован класс танка)
         }
     }
@@ -55,9 +57,10 @@ namespace BLForTankGame
         public IncreaseRange(int artX, int artY) : base(artX, artY)
         { }
 
-        public override void CauseEffect()
+        public override void CauseEffect(Tank tank)
         {
-            base.CauseEffect();
+            tank.Artifacts.Add(); // добавить тот артефакт, который стоит на этих координатах
+            // с модификаторами доступа разобраться (к характеристикам не могу добраться)
             // какой-то эффект на танке (пока не реализован класс танка)
         }
     }
