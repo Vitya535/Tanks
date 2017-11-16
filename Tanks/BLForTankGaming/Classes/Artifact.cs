@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace BLForTankGame
 {
-    public abstract class Artifact : IArtifactsOnField // здесь применить паттерн "адаптер"
+    public abstract class Artifact : IArtifactsOnField, IObservable// здесь применить паттерн "адаптер"
     {
         protected int x; // возможно private
         protected int y;  // возможно private
@@ -15,6 +15,12 @@ namespace BLForTankGame
         public int GetX { get { return x; } }
         public int GetY { get { return y; } }
         public Image GetObjectImage { get { return objectImage; } }
+        private List<IObserver> observers;
+
+        public Artifact()
+        {
+            observers = new List<IObserver>();
+        }
 
         public Artifact(int artX, int artY)
         {
@@ -23,7 +29,25 @@ namespace BLForTankGame
         }
 
         public virtual void CauseEffect(Tank tank)
-        { }// ???? как оказать эффект на танк?
+        {
+            tank.Artifacts.Add(this);
+        }
+
+        public void AddObserver(IObserver o)
+        {
+            observers.Add(o);
+        }
+
+        public void RemoveObserver(IObserver o)
+        {
+            observers.Remove(o);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (IObserver observer in observers)
+                observer.Update(); // добавить в Update все что нужно
+        }       
     }
 
     class RepairKit : Artifact
@@ -33,9 +57,8 @@ namespace BLForTankGame
 
         public override void CauseEffect(Tank tank)
         {
-            tank.Artifacts.Add(); // добавить тот артефакт, который стоит на этих координатах
-            tank. // с модификаторами доступа разобраться (к характеристикам не могу добраться)
-            // какой-то эффект на танке (пока не реализован класс танка)
+            base.CauseEffect(tank);
+            tank.Health += 30;
         }
     }
 
@@ -46,9 +69,8 @@ namespace BLForTankGame
 
         public override void CauseEffect(Tank tank)
         {
-            tank.Artifacts.Add(); // добавить тот артефакт, который стоит на этих координатах
-            // с модификаторами доступа разобраться (к характеристикам не могу добраться)
-            // какой-то эффект на танке (пока не реализован класс танка)
+            base.CauseEffect(tank);
+            tank.TankCartridge.Damage += 5;
         }
     }
 
@@ -59,9 +81,8 @@ namespace BLForTankGame
 
         public override void CauseEffect(Tank tank)
         {
-            tank.Artifacts.Add(); // добавить тот артефакт, который стоит на этих координатах
-            // с модификаторами доступа разобраться (к характеристикам не могу добраться)
-            // какой-то эффект на танке (пока не реализован класс танка)
+            base.CauseEffect(tank);
+            tank.TankCartridge.Range++;
         }
     }
 }

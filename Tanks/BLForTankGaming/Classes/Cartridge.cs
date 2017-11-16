@@ -10,8 +10,8 @@ namespace BLForTankGame
     public abstract partial class Cartridge : ICartridges // использовать паттерн "Цепочка обязанностей" (если он будет вообще нужен)
     {
         protected TypeOfCartridges Type { get; set; } // тип снарядов
-        public int GetDamage { get { return damage; } } // урон снарядов
-        public int GetRange { get { return range; } } // дальность снарядов
+        public int Damage { get { return damage; } set { damage = value; } } // урон снарядов
+        public int Range { get { return range; } set { range = value; } } // дальность снарядов
         protected int damage; // пока до конца не уверен что readonly (надо о нем побольше узнать) 
         protected int range; // пока до конца не уверен что readonly (надо о нем побольше узнать) 
 

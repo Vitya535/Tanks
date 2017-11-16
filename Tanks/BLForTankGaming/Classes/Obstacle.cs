@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace BLForTankGame
 {
-    public abstract class Obstacles : IObstaclesOnField
+    public abstract class Obstacles : IObstaclesOnField, IObservable // возможно здесь зайдет паттерн "Прототип"
     {
         protected int x; // возможно private
         protected int y;  // возможно private
@@ -17,6 +17,28 @@ namespace BLForTankGame
         public int GetY { get { return y; } }
         public int Health { get { return health; } }
         public Image GetObjectImage { get { return objectImage; } }
+        private List<IObserver> observers;
+
+        public void AddObserver(IObserver o)
+        {
+            observers.Add(o);
+        }
+
+        public void RemoveObserver(IObserver o)
+        {
+            observers.Remove(o);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (IObserver observer in observers)
+                observer.Update(); // добавить в Update все что нужно
+        }
+
+        public Obstacles()
+        {
+            observers = new List<IObserver>();
+        }
 
         public Obstacles(int obstX, int obstY)
         {

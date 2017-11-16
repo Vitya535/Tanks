@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLForTankGame
 {
-    public class Game : IGame// сущность игра, которая видит все на поле и что-то делает при определенных действиях в игре
+    public class Game : IGame, IObserver// сущность игра, которая видит все на поле и что-то делает при определенных действиях в игре
     {
         public static GameField Field { get; } // игровое поле, оно одно будет - поэтому static (для него тоже будет "Одиночка")
         public List<Tank> TanksInGame { get; } // танки в игре
@@ -26,6 +26,11 @@ namespace BLForTankGame
                 instance = new Game();
             // после инициализации - методы типа "создать поле", "создать танки в игре" и т. д.
             return instance;
+        }
+
+        public void Update()
+        {
+
         }
     }
 }
