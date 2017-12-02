@@ -13,6 +13,8 @@ namespace BLForTankGame
         public abstract void BuildCartridge();
         public abstract void BuildStrategy();
         public abstract void BuildState();
+        public abstract void SetCoordX();
+        public abstract void SetCoordY();
         public abstract Tank GetResult();
     }
 }

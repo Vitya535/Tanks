@@ -11,8 +11,10 @@ namespace BLForTankGame
         public override void ChangeState(Tank tank)
         {
             if (tank.Health > 50)
+            {
                 tank.State = new StateAlive();
-            tank.Strategy = new AttackStrategy();
+                tank.Strategy = new AttackStrategy();
+            }
         }
     }
 }

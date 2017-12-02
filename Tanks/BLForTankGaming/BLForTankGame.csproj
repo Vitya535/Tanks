@@ -46,12 +46,14 @@
     <Compile Include="BuilderForTank\BuilderForPlayerTank.cs" />
     <Compile Include="BuilderForTank\DefenseTankBuilder.cs" />
     <Compile Include="BuilderForTank\Director.cs" />
+    <Compile Include="ChainOfResponsibilityForCartridges\Handler.cs" />
     <Compile Include="Classes\Artifact.cs" />
     <Compile Include="IteratorForTank\Aggregate.cs" />
     <Compile Include="IteratorForTank\ConcreteAggregate.cs" />
     <Compile Include="IteratorForTank\ConcreteIterator.cs" />
     <Compile Include="IteratorForTank\Iterator.cs" />
     <Compile Include="ObserverForGame\IObservable.cs" />
+    <Compile Include="ObserverForGame\IObservableTank.cs" />
     <Compile Include="ObserverForGame\IObserver.cs" />
     <Compile Include="StateForTank\StateAlive.cs" />
     <Compile Include="StateForTank\StateBurn.cs" />

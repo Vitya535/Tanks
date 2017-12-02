@@ -13,5 +13,11 @@ namespace BLForTankGame
         List<Artifact> Artifacts { get; } // артефакты, которые есть у танка
         IStrategy Strategy { set; } // типа стратегия для танка (если ее можно будет сюда вставить)
         Cartridge TankCartridge { get; } // снаряды, которые есть у танка
+
+        void MoveRight();
+        void MoveLeft();
+        void MoveDown();
+        void MoveUp();
+        void Shoot();
     }
 }

@@ -21,6 +21,8 @@ namespace BLForTankGame
             builder.BuildCartridge();
             builder.BuildStrategy();
             builder.BuildState();
+            builder.SetCoordX();
+            builder.SetCoordY();
         }
     }
 }

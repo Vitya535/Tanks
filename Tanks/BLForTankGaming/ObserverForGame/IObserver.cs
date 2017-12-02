@@ -8,6 +8,10 @@ namespace BLForTankGame
 {
     public interface IObserver
     {
-        void Update();
+        void UpdateMoveRight(Tank ob);
+        void UpdateMoveLeft(Tank ob);
+        void UpdateMoveUp(Tank ob);
+        void UpdateMoveDown(Tank ob);
+        void UpdateShoot(Tank ob);
     }
 }

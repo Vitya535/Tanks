@@ -11,5 +11,6 @@ namespace BLForTankGame
         List<Tank> TanksInGame { get; } // танки в игре
         List<Obstacles> ObstaclesInGame { get; } // препятствия в игре
         List<Artifact> ArtifactsInGame { get; } // артефакты в игре
+        List<CartridgeOnField> CartridgeInGame { get; }
     }
 }

@@ -9,6 +9,7 @@ namespace BLForTankGame
     class DefenseTankBuilder : Builder
     {
         Tank product = new Tank();
+        Random rnd = new Random();
 
         public override void BuildHealth()
         {
@@ -17,7 +18,7 @@ namespace BLForTankGame
 
         public override void BuildCartridge()
         {
-            product.Add(new CartridgeInTank(Cartridge.TypeOfCartridges.Medium, 20, 4));
+            product.Add(new CartridgeInTank(Cartridge.TypeOfCartridges.Light, 20, 4));
         }
 
         public override void BuildSpeed()
@@ -33,6 +34,17 @@ namespace BLForTankGame
         public override void BuildState()
         {
             product.Add(new StateAlive());
+        }
+
+        // указать координаты поля здесь в рандоме
+        public override void SetCoordX()
+        {
+            product.Add(rnd.Next());
+        }
+
+        public override void SetCoordY()
+        {
+            product.Add(rnd.Next());
         }
 
         public override Tank GetResult()

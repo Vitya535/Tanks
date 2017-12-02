@@ -38,15 +38,15 @@ namespace BLForTankGame
             observers.Add(o);
         }
 
-        public void RemoveObserver(IObserver o)
+        public void RemoveObserver()
         {
-            observers.Remove(o);
+            observers = null;
         }
 
-        public void NotifyObservers()
+        public void NotifyObserver()
         {
-            foreach (IObserver observer in observers)
-                observer.Update(); // добавить в Update все что нужно
+            //foreach (IObserver observer in observers)
+                //observer.Update(); // добавить в Update все что нужно
         }       
     }
 

@@ -11,7 +11,7 @@ namespace BLForTankGame
         private static GameField instance;
         // по поводу полей, свойств пока точно не знаю
 
-        protected GameField()
+        private GameField()
         {
 
         }

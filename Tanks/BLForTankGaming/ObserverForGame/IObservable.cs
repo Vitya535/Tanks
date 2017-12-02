@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace BLForTankGame
 {
-    interface IObservable
+    public interface IObservable
     {
         void AddObserver(IObserver o);
-        void RemoveObserver(IObserver o);
-        void NotifyObservers();
+        void RemoveObserver();
     }
 }
