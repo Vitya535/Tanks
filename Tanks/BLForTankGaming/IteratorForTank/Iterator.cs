@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLForTankGame
 {
-    abstract class Iterator
+    public abstract class Iterator
     {
         public abstract object First();
         public abstract object Next();

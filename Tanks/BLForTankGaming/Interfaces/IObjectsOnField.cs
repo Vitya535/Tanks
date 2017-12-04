@@ -9,7 +9,7 @@ namespace BLForTankGame
 {
     public interface IObjectsOnField // интерфейс, описывающий все обьекты, присутствующие на поле
     {
-        Image GetObjectImage { get; } // изображение обьекта (танка, артефакта и так далее)
+        Image ObjectImage { get; } // изображение обьекта (танка, артефакта и так далее)
         int GetX { get; } // координата икс на поле
         int GetY { get; } // координта игрек на поле
     }

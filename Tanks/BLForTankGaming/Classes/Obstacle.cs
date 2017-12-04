@@ -9,35 +9,30 @@ namespace BLForTankGame
 {
     public abstract class Obstacles : IObstaclesOnField, IObservable
     {
-        protected int x; // возможно private
-        protected int y;  // возможно private
+        protected readonly int x; // возможно private
+        protected readonly int y;  // возможно private
         protected int health; // возможно private
         protected Image objectImage;  // возможно private
         public int GetX { get { return x; } }
         public int GetY { get { return y; } }
         public int Health { get { return health; } }
-        public Image GetObjectImage { get { return objectImage; } }
-        private List<IObserver> observers;
+        public Image ObjectImage { get { return objectImage; } }
+        private IObserver observer;
 
         public void AddObserver(IObserver o)
         {
-            observers.Add(o);
+            observer = o;
         }
 
-        public void RemoveObserver(IObserver o)
+        public void RemoveObserver()
         {
-            observers.Remove(o);
+            observer = null;
         }
 
         public void NotifyObservers()
         {
             //foreach (IObserver observer in observers)
                 //observer.Update(); // добавить в Update все что нужно
-        }
-
-        public Obstacles()
-        {
-            observers = new List<IObserver>();
         }
 
         public Obstacles(int obstX, int obstY)
@@ -51,6 +46,7 @@ namespace BLForTankGame
     {
         public DestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/Destructible.jpg");
             health = 100;
         }
     }
@@ -59,6 +55,7 @@ namespace BLForTankGame
     {
         public UnDestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/Undestructible.jpg");
             health = 0;
         }
     }

@@ -9,17 +9,17 @@ namespace BLForTankGame
 {
     public abstract class Artifact : IArtifactsOnField, IObservable// здесь применить паттерн "адаптер"
     {
-        protected int x; // возможно private
-        protected int y;  // возможно private
+        protected readonly int x; // возможно private
+        protected readonly int y;  // возможно private
         protected Image objectImage;  // возможно private
         public int GetX { get { return x; } }
         public int GetY { get { return y; } }
-        public Image GetObjectImage { get { return objectImage; } }
-        private List<IObserver> observers;
+        public Image ObjectImage { get { return objectImage; } }
+        private IObserver observer;
 
         public Artifact()
         {
-            observers = new List<IObserver>();
+            observer = null;
         }
 
         public Artifact(int artX, int artY)
@@ -29,18 +29,16 @@ namespace BLForTankGame
         }
 
         public virtual void CauseEffect(Tank tank)
-        {
-            tank.Artifacts.Add(this);
-        }
+        {}
 
         public void AddObserver(IObserver o)
         {
-            observers.Add(o);
+            observer = o;
         }
 
         public void RemoveObserver()
         {
-            observers = null;
+            observer = null;
         }
 
         public void NotifyObserver()
@@ -53,11 +51,12 @@ namespace BLForTankGame
     class RepairKit : Artifact
     {
         public RepairKit(int artX, int artY) : base(artX, artY)
-        {  }
+        {
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/RepairKit.png");
+        }
 
         public override void CauseEffect(Tank tank)
         {
-            base.CauseEffect(tank);
             tank.Health += 30;
         }
     }
@@ -65,11 +64,12 @@ namespace BLForTankGame
     class IncreaseDamage : Artifact
     {
         public IncreaseDamage(int artX, int artY) : base(artX, artY)
-        { }
+        {
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/IncreaseDamage.jpg");
+        }
 
         public override void CauseEffect(Tank tank)
         {
-            base.CauseEffect(tank);
             tank.TankCartridge.Damage += 5;
         }
     }
@@ -77,11 +77,12 @@ namespace BLForTankGame
     class IncreaseRange : Artifact
     {
         public IncreaseRange(int artX, int artY) : base(artX, artY)
-        { }
+        {
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/Range.png");
+        }
 
         public override void CauseEffect(Tank tank)
         {
-            base.CauseEffect(tank);
             tank.TankCartridge.Range++;
         }
     }

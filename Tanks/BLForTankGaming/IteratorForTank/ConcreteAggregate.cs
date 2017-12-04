@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BLForTankGame
 {
-    class ConcreteAggregate : Aggregate
+    public class ConcreteAggregate : Aggregate
     {
-        private readonly List<object> _items = new List<object>();
+        private readonly List<Tank> _items = new List<Tank>();
 
         public override Iterator CreateIterator()
         {
@@ -18,10 +18,9 @@ namespace BLForTankGame
         public override int Count
         {
             get { return _items.Count; }
-            protected set { }
         }
 
-        public override object this[int index]
+        public override Tank this[int index]
         {
             get { return _items[index]; }
             set { _items.Insert(index, value); }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace BLForTankGame
 {
@@ -21,11 +22,6 @@ namespace BLForTankGame
             product.Add(new CartridgeInTank(Cartridge.TypeOfCartridges.Heavy, 30, 5));
         }
 
-        public override void BuildSpeed()
-        {
-            product.Add(1.25);
-        }
-
         public override void BuildStrategy()
         {
             product.Add(new AttackStrategy());
@@ -36,19 +32,24 @@ namespace BLForTankGame
             product.Add(new StateAlive());
         }
 
-        // указать координаты поля здесь в рандоме
         public override void SetCoordX()
         {
-            product.Add(rnd.Next());
+            product.Add(rnd.Next(1, 31));
         }
 
         public override void SetCoordY()
         {
-            product.Add(rnd.Next());
+            product.Add(rnd.Next(1, 21));
+        }
+
+        public override void SetStartImage()
+        {
+            product.Add(Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/TankEnemyDown.jpg"));
         }
 
         public override Tank GetResult()
         {
+            product.CreateResult();
             return product;
         }
     }

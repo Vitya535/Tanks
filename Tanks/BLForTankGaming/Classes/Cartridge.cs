@@ -32,16 +32,20 @@ namespace BLForTankGame
         { }
     }
 
-    public class CartridgeOnField : Cartridge, IObjectsOnField
+    public class CartridgeOnField : Cartridge, IObjectsOnField // класс для патронов на поле
     {
-        private Image objectImage;
-        private int x;
-        private int y;
-        public Image GetObjectImage { get { return objectImage; } }
+        private readonly Image objectImage;
+        private readonly int x;
+        private readonly int y;
+        public Image ObjectImage { get { return objectImage; } }
         public int GetX { get { return x; } }
         public int GetY { get { return y; } }
 
-        public CartridgeOnField(TypeOfCartridges type, int dmg, int ranged) : base(type, dmg, ranged)
-        { }
+        public CartridgeOnField(TypeOfCartridges type, int dmg, int ranged, int X, int Y, Image image) : base(type, dmg, ranged)
+        {
+            objectImage = image;
+            x = X;
+            y = Y;
+        }
     }
 }

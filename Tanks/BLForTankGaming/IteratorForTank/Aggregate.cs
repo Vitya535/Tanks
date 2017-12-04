@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BLForTankGame
 {
-    abstract class Aggregate
+    public abstract class Aggregate
     {
         public abstract Iterator CreateIterator();
-        public abstract int Count { get; protected set; }
-        public abstract object this[int index] { get; set; }
+        public abstract int Count { get; }
+        public abstract Tank this[int index] { get; set; }
     }
 }

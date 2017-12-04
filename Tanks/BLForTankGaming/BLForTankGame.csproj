@@ -48,6 +48,7 @@
     <Compile Include="BuilderForTank\Director.cs" />
     <Compile Include="ChainOfResponsibilityForCartridges\Handler.cs" />
     <Compile Include="Classes\Artifact.cs" />
+    <Compile Include="Classes\ForDraw.cs" />
     <Compile Include="IteratorForTank\Aggregate.cs" />
     <Compile Include="IteratorForTank\ConcreteAggregate.cs" />
     <Compile Include="IteratorForTank\ConcreteIterator.cs" />
@@ -62,11 +63,9 @@
     <Compile Include="Classes\Cartridge.cs" />
     <Compile Include="StrategyForTank\DefenseStrategy.cs" />
     <Compile Include="Classes\Game.cs" />
-    <Compile Include="Classes\GameField.cs" />
     <Compile Include="Interfaces\IArtifactsOnField.cs" />
     <Compile Include="Interfaces\ICartridges.cs" />
     <Compile Include="Interfaces\IGame.cs" />
-    <Compile Include="Interfaces\IGameField.cs" />
     <Compile Include="Interfaces\IObjectsOnField.cs" />
     <Compile Include="Interfaces\IObstaclesOnField.cs" />
     <Compile Include="StrategyForTank\IStrategy.cs" />

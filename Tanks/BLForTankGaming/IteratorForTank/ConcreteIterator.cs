@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLForTankGame
 {
-    class ConcreteIterator : Iterator
+    public class ConcreteIterator : Iterator
     {
         private readonly Aggregate _aggregate;
         private int Current;
@@ -23,11 +23,7 @@ namespace BLForTankGame
 
         public override object Next()
         {
-            object ret = null;
-            Current++;
-            if (Current < _aggregate.Count)
-                ret = _aggregate[Current];
-            return ret;
+            return _aggregate[Current++];
         }
 
         public override object CurrentItem()

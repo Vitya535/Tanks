@@ -9,12 +9,12 @@ namespace BLForTankGame
     abstract class Builder
     {
         public abstract void BuildHealth();
-        public abstract void BuildSpeed();
         public abstract void BuildCartridge();
         public abstract void BuildStrategy();
         public abstract void BuildState();
         public abstract void SetCoordX();
         public abstract void SetCoordY();
+        public abstract void SetStartImage();
         public abstract Tank GetResult();
     }
 }
