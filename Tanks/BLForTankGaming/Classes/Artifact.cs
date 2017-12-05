@@ -52,7 +52,7 @@ namespace BLForTankGame
     {
         public RepairKit(int artX, int artY) : base(artX, artY)
         {
-            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/RepairKit.png");
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/health.jpg");
         }
 
         public override void CauseEffect(Tank tank)
@@ -65,7 +65,7 @@ namespace BLForTankGame
     {
         public IncreaseDamage(int artX, int artY) : base(artX, artY)
         {
-            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/IncreaseDamage.jpg");
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/damage.jpg");
         }
 
         public override void CauseEffect(Tank tank)
@@ -78,7 +78,7 @@ namespace BLForTankGame
     {
         public IncreaseRange(int artX, int artY) : base(artX, artY)
         {
-            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/Range.png");
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/range.jpg");
         }
 
         public override void CauseEffect(Tank tank)

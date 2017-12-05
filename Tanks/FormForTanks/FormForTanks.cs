@@ -16,6 +16,7 @@ namespace FormForTanks
         Graphics g;
         Bitmap bmp;
         Pen MyPen;
+        Game MyGame;
         public FormForTanks()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace FormForTanks
 
         private void beginGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Game MyGame = Game.Initialize(3, 20, 5, 3);
+            MyGame = Game.Initialize(3, 20, 5, 3);
             Utils.DrawGame(MyGame, g);
             PBForTanks.Image = bmp;
         }
@@ -43,6 +44,39 @@ namespace FormForTanks
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void FormForTanks_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                case Keys.Up:
+                    MyGame.TanksInGame[0].NotifyObserverForMoveUp();
+                    break;
+                case Keys.A:
+                case Keys.Left:
+                    MyGame.TanksInGame[0].NotifyObserverForMoveLeft();
+                    break;
+                case Keys.S:
+                case Keys.Down:
+                    MyGame.TanksInGame[0].NotifyObserverForMoveDown();
+                    break;
+                case Keys.D:
+                case Keys.Right:
+                    MyGame.TanksInGame[0].NotifyObserverForMoveRight();
+                    break;
+            }
+            g.Clear(Color.White);
+            Form1_Load(sender, e);
+            Utils.DrawGame(MyGame, g);
+            PBForTanks.Image = bmp;
+        }
+
+        private void FormForTanks_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.Handled)
+                MyGame.TanksInGame[0].NotifyObserverForShoot();
         }
     }
 }

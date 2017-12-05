@@ -31,7 +31,6 @@ namespace BLForTankGame
             TanksInGame = new List<Tank>();
             TanksInGame.Add(ForPlayer);
             Random rnd = new Random();
-            // разобраться с координатами (в танке и вообще в генерации)
             for (int i = 0; i < CountTanks - 1; i++)
             {
                 Tank BotTank = null;
@@ -46,7 +45,6 @@ namespace BLForTankGame
                         BotTank = A.GetResult();
                         break;
                 }
-                BotTank.AddObserver(instance); // а хорошо ли так делать?
                 TanksInGame.Add(BotTank);
             }
 
@@ -57,13 +55,12 @@ namespace BLForTankGame
                 switch (rnd.Next(1, 3))
                 {
                     case 1:
-                        MyObstacle = new UnDestructibleObstacle(rnd.Next(1, 31), rnd.Next(1, 21)); // рандомная или конкретная координата на поле
+                        MyObstacle = new UnDestructibleObstacle(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                     case 2:
-                        MyObstacle = new DestructibleObstacle(rnd.Next(1, 31), rnd.Next(1, 21)); // рандомная или конкретная координата на поле
+                        MyObstacle = new DestructibleObstacle(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                 }
-                MyObstacle.AddObserver(instance);
                 ObstaclesInGame.Add(MyObstacle);
             }
 
@@ -74,16 +71,15 @@ namespace BLForTankGame
                 switch (rnd.Next(1, 4))
                 {
                     case 1:
-                        MyArt = new RepairKit(rnd.Next(1, 31), rnd.Next(1, 21)); // рандомная или конкретная координата на поле
+                        MyArt = new RepairKit(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                     case 2:
-                        MyArt = new IncreaseDamage(rnd.Next(1, 31), rnd.Next(1, 21)); // рандомная или конкретная координата на поле
+                        MyArt = new IncreaseDamage(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                     case 3:
-                        MyArt = new IncreaseRange(rnd.Next(1, 31), rnd.Next(1, 21)); // рандомная или конкретная координата на поле
+                        MyArt = new IncreaseRange(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                 }
-                MyArt.AddObserver(instance);
                 ArtifactsInGame.Add(MyArt);
             }
 
@@ -94,24 +90,41 @@ namespace BLForTankGame
                 switch (rnd.Next(1, 4))
                 {
                     case 1:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Light, 20, 4, rnd.Next(1, 31), rnd.Next(1, 21), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/LightCartridges.jpg"));
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Light, 20, 4, rnd.Next(1, 26), rnd.Next(1, 26), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/whiteShell.jpg"));
                         break;
                     case 2:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Medium, 25, 4, rnd.Next(1, 31), rnd.Next(1, 21), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/MediumCartridges.jpg")); 
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Medium, 25, 4, rnd.Next(1, 26), rnd.Next(1, 26), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/yellowShell.jpg")); 
                         break;
                     case 3:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Heavy, 30, 4, rnd.Next(1, 31), rnd.Next(1, 21), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/HeavyCartridges.jpg")); 
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Heavy, 30, 4, rnd.Next(1, 26), rnd.Next(1, 26), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/blackShell.jpg")); 
                         break;
                 }
-                //MyCart.AddObserver(instance);
                 CartridgeInGame.Add(MyCart);
             }
+        }
+
+        public static Game ReturnInstance()
+        {
+            return instance;
+        }
+
+        private void CreateObservers()
+        {
+            foreach (Tank t in TanksInGame)
+                t.AddObserver(instance);
+            foreach (Obstacles o in ObstaclesInGame)
+                o.AddObserver(instance);
+            foreach (Artifact art in ArtifactsInGame)
+                art.AddObserver(instance);
+            //foreach (CartridgeOnField c in CartridgesInGame)
+                //c.AddObserver(instance);
         }
 
         public static Game Initialize(int CountTanks, int CountObstacles, int CountCartridges, int CountArtifacts)
         {
             if (instance == null)
                 instance = new Game(CountTanks, CountObstacles, CountCartridges, CountArtifacts);
+            instance.CreateObservers();
             return instance;
         }
 

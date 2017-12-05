@@ -45,7 +45,7 @@ namespace BLForTankGame
 
         public override void SetStartImage()
         {
-            product.Add(Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/TankPlayerDown.jpg"));
+            product.Add(Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PLayDown.jpg"));
         }
 
         public override Tank GetResult()

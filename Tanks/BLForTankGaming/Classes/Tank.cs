@@ -37,6 +37,7 @@ namespace BLForTankGame
             x = (int)parts[4];
             y = (int)parts[5];
             image = (Image)parts[6];
+            parts.Clear();
         }
 
         public void UseStrategy()
@@ -79,44 +80,94 @@ namespace BLForTankGame
             observer.UpdateShoot(this);
         }
 
-        // наверное в передвижении и стрельбе должна быть перерисовка (можно ее в апдейт у игры засунуть и вызывать 2 метода последовательно)
-        // для каждого Move добавить, что если он идет на клетку с артефактом или снарядом, то он оказывает эффект на танк (или танк берет артефакт на этой клетке), и артефакт или снаряд исчезают
-        // не позволять заезжать при передвижении на другие танки и препятствия
-        // но все вышеперечисленное - только когда Саша сделает поле (ну и форму вообще наверное)
+        public void GetArtifact(Artifact art)
+        {
+            art.CauseEffect(this);
+        }
+
         public void MoveRight() // перемещение танка
         {
-            
-            x++;
+            if (x < 24)
+            {
+                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x + 1, y);
+                if (f is Artifact || f is CartridgeOnField || f is null)
+                {
+                    x++;
+                    if (f is CartridgeOnField)
+                        TankCartridge = (CartridgeOnField)f;
+                    if (f is Artifact)
+                        GetArtifact((Artifact)f);
+                }
+            }
+            if (Strategy is StrategyForPlayer)
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PlayRight.jpg");
+            else
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIRight.jpg");
         }
 
         public void MoveLeft() // перемещение танка
         {
-            //if (на клетке, на которую перемещаемся есть артефакт или снаряды или ничего нет и если она не за пределами поля, то мы на нее идем, иначе не идем на нее вообще)
-            // если это артефакт - переходим в метод CauseEffect, если это снаряды - переприсваиваем снаряды, соответственно потом удаляем с поля и из игры данный обьект
-            x--;
-            // перерисовка изображения на текущую клетку, если мы переместились и удаление его с прошлой клетки
+            if (x > 0)
+            {
+                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x - 1, y);
+                if (f is Artifact || f is CartridgeOnField || f is null)
+                {
+                    x--;
+                    if (f is CartridgeOnField)
+                        TankCartridge = (CartridgeOnField)f;
+                    if (f is Artifact)
+                        GetArtifact((Artifact)f);
+                }
+            }
+            if (Strategy is StrategyForPlayer)
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PLayLeft.jpg");
+            else
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AILeft.jpg");
         }
 
         public void MoveDown() // перемещение танка
         {
-            //if (на клетке, на которую перемещаемся есть артефакт или снаряды или ничего нет и если она не за пределами поля, то мы на нее идем, иначе не идем на нее вообще)
-            // если это артефакт - переходим в метод CauseEffect, если это снаряды - переприсваиваем снаряды, соответственно потом удаляем с поля и из игры данный обьект
-            y--;
-            // перерисовка изображения на текущую клетку, если мы переместились и удаление его с прошлой клетки
+            if (y < 24)
+            {
+                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x, y + 1);
+                if (f is Artifact || f is CartridgeOnField || f is null)
+                {
+                    y++;
+                    if (f is CartridgeOnField)
+                        TankCartridge = (CartridgeOnField)f;
+                    if (f is Artifact)
+                        GetArtifact((Artifact)f);
+                }
+            }
+            if (Strategy is StrategyForPlayer)
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PLayDown.jpg");
+            else
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIdown.jpg");
         }
 
         public void MoveUp() // перемещение танка
         {
-            //if (на клетке, на которую перемещаемся есть артефакт или снаряды или ничего нет и если она не за пределами поля, то мы на нее идем, иначе не идем на нее вообще)
-            // если это артефакт - переходим в метод CauseEffect, если это снаряды - переприсваиваем снаряды, соответственно потом удаляем с поля и из игры данный обьект
-            y++;
-            // перерисовка изображения на текущую клетку, если мы переместились и удаление его с прошлой клетки
+            if (y > 0)
+            {
+                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x, y - 1);
+                if (f is Artifact || f is CartridgeOnField || f is null)
+                {
+                    y--;
+                    if (f is CartridgeOnField)
+                        TankCartridge = (CartridgeOnField)f;
+                    if (f is Artifact)
+                        GetArtifact((Artifact)f);
+                }
+            }
+            if (Strategy is StrategyForPlayer)
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PlayUp.jpg");
+            else
+                image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIUp.jpg");
         }
 
         public void Shoot() // стрельба танка
         {
-            // с клетки, на которой танк находится - отправляется запрос на обработку к другим клеткам
-            // если на конечной клетке находился танк или разрушаемое препятствие, то 
+
         }
     }
 }

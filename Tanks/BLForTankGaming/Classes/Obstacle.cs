@@ -46,7 +46,7 @@ namespace BLForTankGame
     {
         public DestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
-            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/Destructible.jpg");
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/brick.jpg");
             health = 100;
         }
     }
@@ -55,7 +55,7 @@ namespace BLForTankGame
     {
         public UnDestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
-            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/Undestructible.jpg");
+            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/metbrck.jpg");
             health = 0;
         }
     }

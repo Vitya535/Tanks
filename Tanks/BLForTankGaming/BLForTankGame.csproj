@@ -48,7 +48,7 @@
     <Compile Include="BuilderForTank\Director.cs" />
     <Compile Include="ChainOfResponsibilityForCartridges\Handler.cs" />
     <Compile Include="Classes\Artifact.cs" />
-    <Compile Include="Classes\ForDraw.cs" />
+    <Compile Include="Classes\Utils.cs" />
     <Compile Include="IteratorForTank\Aggregate.cs" />
     <Compile Include="IteratorForTank\ConcreteAggregate.cs" />
     <Compile Include="IteratorForTank\ConcreteIterator.cs" />
