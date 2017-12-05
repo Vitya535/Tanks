@@ -29,12 +29,6 @@ namespace BLForTankGame
             observer = null;
         }
 
-        public void NotifyObservers()
-        {
-            //foreach (IObserver observer in observers)
-                //observer.Update(); // добавить в Update все что нужно
-        }
-
         public Obstacles(int obstX, int obstY)
         {
             x = obstX;
@@ -42,16 +36,23 @@ namespace BLForTankGame
         }
     }
 
-    class DestructibleObstacle : Obstacles// класс разрушаемых препятствий
+    public class DestructibleObstacle : Obstacles// класс разрушаемых препятствий
     {
         public DestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
             objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/brick.jpg");
             health = 100;
         }
+
+        public void TakeDamage(Tank From)
+        {
+            health -= From.TankCartridge.Damage;
+            if (health <= 0)
+                Game.ReturnInstance().ObstaclesInGame.Remove(this);
+        }
     }
 
-    class UnDestructibleObstacle : Obstacles// класс неразрушимых препятствий
+    public class UnDestructibleObstacle : Obstacles// класс неразрушимых препятствий
     {
         public UnDestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {

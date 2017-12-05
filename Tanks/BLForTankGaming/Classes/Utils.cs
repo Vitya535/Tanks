@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Threading;
 
 namespace BLForTankGame
 {
     public class Utils
     {
-        public static void DrawGame(Game game, Graphics g) // рисование начала игры
+        public static void DrawGame(Game game, Graphics g) // рисование начала игры и перемещения
         {
             foreach (Tank t in game.TanksInGame)
                 g.DrawImage(t.ObjectImage, new Point(t.GetX * 20, t.GetY * 20));
@@ -21,7 +22,12 @@ namespace BLForTankGame
                 g.DrawImage(art.ObjectImage, new Point(art.GetX * 20, art.GetY * 20));
         }
 
-        public static IObjectsOnField FindObjectOnNearbyCell(Game game, int x, int y) // проверка для перемещения
+        public static void DrawShoot(Game game, Graphics g, Tank t, float i) //
+        {
+            g.FillRectangle(Brushes.Black, new Rectangle(new Point((int)(t.GetX + i) * 20, (int)(t.GetY + i) * 20), new Size(6, 6)));
+        }
+
+        public static IObjectsOnField FindObjectOnNearbyCell(Game game, int x, int y) // нахождение обьекта по координатам
         {
             foreach (Tank t in game.TanksInGame)
                 if (x == t.GetX && y == t.GetY)

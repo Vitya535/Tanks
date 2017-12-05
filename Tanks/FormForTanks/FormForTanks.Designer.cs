@@ -106,7 +106,6 @@
             this.Text = "Танчики";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormForTanks_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormForTanks_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.PBForTanks)).EndInit();
             this.MSForTanks.ResumeLayout(false);
             this.MSForTanks.PerformLayout();

@@ -165,9 +165,80 @@ namespace BLForTankGame
                 image = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIUp.jpg");
         }
 
-        public void Shoot() // стрельба танка
+        public void Shoot() // стрельба танка (не работает из-за условий)
         {
+            if (image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PlayUp.jpg") || image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIUp.jpg"))
+            {
+                for (int i = 0; i <= TankCartridge.Range; i++)
+                {
+                    IObjectsOnField obj = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), GetX, GetY - i);
+                    if (obj is Tank || obj is DestructibleObstacle)
+                    {
+                        if (obj is Tank)
+                            CauseDamageToTank((Tank)obj);
+                        if (obj is DestructibleObstacle)
+                            CauseDamageToObstacle((DestructibleObstacle)obj);
+                        break;
+                    }
+                }
+            }
+            else if (image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PLayDown.jpg") || image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIdown.jpg"))
+            {
+                for (int i = 0; i <= TankCartridge.Range; i++)
+                {
+                    IObjectsOnField obj = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), GetX, GetY + i);
+                    if (obj is Tank || obj is DestructibleObstacle)
+                    {
+                        if (obj is Tank)
+                            CauseDamageToTank((Tank)obj);
+                        if (obj is DestructibleObstacle)
+                            CauseDamageToObstacle((DestructibleObstacle)obj);
+                        break;
+                    }
+                }
+            }
+            else if (image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PLayLeft.jpg") || image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AILeft.jpg"))
+            {
+                for (int i = 0; i <= TankCartridge.Range; i++)
+                {
+                    IObjectsOnField obj = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), GetX - i, GetY);
+                    if (obj is Tank || obj is DestructibleObstacle)
+                    {
+                        if (obj is Tank)
+                            CauseDamageToTank((Tank)obj);
+                        if (obj is DestructibleObstacle)
+                            CauseDamageToObstacle((DestructibleObstacle)obj);
+                        break;
+                    }
+                }
+            }
+            else if (image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PlayRight.jpg") || image == Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIRight.jpg"))
+            {
+                for (int i = 0; i <= TankCartridge.Range; i++)
+                {
+                    IObjectsOnField obj = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), GetX + i, GetY);
+                    if (obj is Tank || obj is DestructibleObstacle)
+                    {
+                        if (obj is Tank)
+                            CauseDamageToTank((Tank)obj);
+                        if (obj is DestructibleObstacle)
+                            CauseDamageToObstacle((DestructibleObstacle)obj);
+                        break;
+                    }
+                }
+            }
+        }
 
+        private void CauseDamageToTank(Tank To)
+        {
+            To.health -= TankCartridge.Damage;
+            if (To.health <= 0)
+                Game.ReturnInstance().TanksInGame.Remove(To);
+        }
+
+        private void CauseDamageToObstacle(DestructibleObstacle To)
+        {
+            To.TakeDamage(this);
         }
     }
 }

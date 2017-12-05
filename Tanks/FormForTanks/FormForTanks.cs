@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLForTankGame;
+using System.Threading;
 
 namespace FormForTanks
 {
@@ -66,17 +67,21 @@ namespace FormForTanks
                 case Keys.Right:
                     MyGame.TanksInGame[0].NotifyObserverForMoveRight();
                     break;
+                case Keys.Space:
+                //        for (int i = 0; i < MyGame.TanksInGame[0].TankCartridge.Range; i++)
+                //        {
+                //            g.Clear(Color.White);
+                //            Form1_Load(sender, e);
+                //            g.FillRectangle(Brushes.Black, new RectangleF(new PointF((MyGame.TanksInGame[0].GetX + i) * 20, (MyGame.TanksInGame[0].GetY + i) * 20), new Size(15, 15) ));
+                //            PBForTanks.Image = bmp;
+                //        }
+                        MyGame.TanksInGame[0].NotifyObserverForShoot();
+                    break;
             }
             g.Clear(Color.White);
             Form1_Load(sender, e);
             Utils.DrawGame(MyGame, g);
             PBForTanks.Image = bmp;
-        }
-
-        private void FormForTanks_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.Handled)
-                MyGame.TanksInGame[0].NotifyObserverForShoot();
         }
     }
 }
