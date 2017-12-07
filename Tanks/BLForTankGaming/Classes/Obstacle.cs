@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace BLForTankGame
 {
-    public abstract class Obstacles : IObstaclesOnField, IObservable
+    public abstract class Obstacles : IObstaclesOnField
     {
         protected readonly int x; // возможно private
         protected readonly int y;  // возможно private
@@ -17,17 +17,6 @@ namespace BLForTankGame
         public int GetY { get { return y; } }
         public int Health { get { return health; } }
         public Image ObjectImage { get { return objectImage; } }
-        private IObserver observer;
-
-        public void AddObserver(IObserver o)
-        {
-            observer = o;
-        }
-
-        public void RemoveObserver()
-        {
-            observer = null;
-        }
 
         public Obstacles(int obstX, int obstY)
         {
@@ -40,7 +29,7 @@ namespace BLForTankGame
     {
         public DestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
-            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/brick.jpg");
+            objectImage = ImagesForGame.GetDestructObstacle;
             health = 100;
         }
 
@@ -56,7 +45,7 @@ namespace BLForTankGame
     {
         public UnDestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
-            objectImage = Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/metbrck.jpg");
+            objectImage = ImagesForGame.GetUndestructObstacle;
             health = 0;
         }
     }

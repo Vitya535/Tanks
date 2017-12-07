@@ -22,9 +22,10 @@ namespace BLForTankGame
                 g.DrawImage(art.ObjectImage, new Point(art.GetX * 20, art.GetY * 20));
         }
 
-        public static void DrawShoot(Game game, Graphics g, Tank t, float i) //
+        public static void DrawMove(Game game, Graphics g)
         {
-            g.FillRectangle(Brushes.Black, new Rectangle(new Point((int)(t.GetX + i) * 20, (int)(t.GetY + i) * 20), new Size(6, 6)));
+            foreach (Tank t in game.TanksInGame)
+                g.DrawImage(t.ObjectImage, new Point(t.GetX * 20, t.GetY * 20));
         }
 
         public static IObjectsOnField FindObjectOnNearbyCell(Game game, int x, int y) // нахождение обьекта по координатам

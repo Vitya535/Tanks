@@ -8,10 +8,12 @@ namespace BLForTankGame
 {
     abstract class Builder
     {
-        public abstract void BuildHealth();
+        private Random rndOne = new Random();
+        private Random rndTwo = new Random();
+        public Random GetRndOne { get { return rndOne; } }
+        public Random GetRndTwo { get { return rndTwo; } }
         public abstract void BuildCartridge();
         public abstract void BuildStrategy();
-        public abstract void BuildState();
         public abstract void SetCoordX();
         public abstract void SetCoordY();
         public abstract void SetStartImage();

@@ -10,12 +10,6 @@ namespace BLForTankGame
     class BuilderForPlayerTank : Builder
     {
         Tank product = new Tank();
-        Random rnd = new Random();
-
-        public override void BuildHealth()
-        {
-            product.Add(100);
-        }
 
         public override void BuildCartridge()
         {
@@ -25,11 +19,6 @@ namespace BLForTankGame
         public override void BuildStrategy()
         {
             product.Add(new StrategyForPlayer());
-        }
-
-        public override void BuildState()
-        {
-            product.Add(new StateAlive());
         }
 
         // указать координаты поля здесь в рандоме
@@ -45,7 +34,7 @@ namespace BLForTankGame
 
         public override void SetStartImage()
         {
-            product.Add(Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/PLayDown.jpg"));
+            product.Add(ImagesForGame.GetTankPlayerDown);
         }
 
         public override Tank GetResult()

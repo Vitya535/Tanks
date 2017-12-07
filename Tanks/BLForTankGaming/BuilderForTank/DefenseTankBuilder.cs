@@ -10,12 +10,7 @@ namespace BLForTankGame
     class DefenseTankBuilder : Builder
     {
         Tank product = new Tank();
-        Random rnd = new Random();
-
-        public override void BuildHealth()
-        {
-            product.Add(100);
-        }
+        //Random rnd1 = new Random();
 
         public override void BuildCartridge()
         {
@@ -27,24 +22,19 @@ namespace BLForTankGame
             product.Add(new DefenseStrategy());
         }
 
-        public override void BuildState()
-        {
-            product.Add(new StateAlive());
-        }
-
         public override void SetCoordX()
         {
-            product.Add(rnd.Next(1, 31));
+            product.Add(GetRndOne.Next(1, 26));
         }
 
         public override void SetCoordY()
         {
-            product.Add(rnd.Next(1, 21));
+            product.Add(GetRndOne.Next(1, 26));
         }
 
         public override void SetStartImage()
         {
-            product.Add(Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/AIDown.jpg"));
+            product.Add(ImagesForGame.GetTankAIDown);
         }
 
         public override Tank GetResult()

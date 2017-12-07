@@ -25,27 +25,25 @@ namespace BLForTankGame
             Director Att = new Director(A);
             Director Def = new Director(D);
             Director Pl = new Director(P);
-            Pl.Construct();
 
+            Pl.Construct();
             Tank ForPlayer = P.GetResult();
             TanksInGame = new List<Tank>();
             TanksInGame.Add(ForPlayer);
             Random rnd = new Random();
             for (int i = 0; i < CountTanks - 1; i++)
             {
-                Tank BotTank = null;
                 switch (rnd.Next(1,3))
                 {
                     case 1:
                         Def.Construct();
-                        BotTank = D.GetResult();
+                        TanksInGame.Add(D.GetResult());
                         break;
                     case 2:
                         Att.Construct();
-                        BotTank = A.GetResult();
+                        TanksInGame.Add(A.GetResult());
                         break;
                 }
-                TanksInGame.Add(BotTank);
             }
 
             ObstaclesInGame = new List<Obstacles>();
@@ -90,13 +88,13 @@ namespace BLForTankGame
                 switch (rnd.Next(1, 4))
                 {
                     case 1:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Light, 20, 4, rnd.Next(1, 26), rnd.Next(1, 26), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/whiteShell.jpg"));
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Light, 20, 4, rnd.Next(1, 26), rnd.Next(1, 26), ImagesForGame.GetLightShell);
                         break;
                     case 2:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Medium, 25, 4, rnd.Next(1, 26), rnd.Next(1, 26), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/yellowShell.jpg")); 
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Medium, 25, 4, rnd.Next(1, 26), rnd.Next(1, 26), ImagesForGame.GetMediumShell); 
                         break;
                     case 3:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Heavy, 30, 4, rnd.Next(1, 26), rnd.Next(1, 26), Image.FromFile("C:/Users/Виктор/Desktop/Университет/3семестр/Tanks/Tanks/Images/blackShell.jpg")); 
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Heavy, 30, 4, rnd.Next(1, 26), rnd.Next(1, 26), ImagesForGame.GetHeavyShell); 
                         break;
                 }
                 CartridgeInGame.Add(MyCart);
@@ -112,12 +110,6 @@ namespace BLForTankGame
         {
             foreach (Tank t in TanksInGame)
                 t.AddObserver(instance);
-            foreach (Obstacles o in ObstaclesInGame)
-                o.AddObserver(instance);
-            foreach (Artifact art in ArtifactsInGame)
-                art.AddObserver(instance);
-            //foreach (CartridgeOnField c in CartridgesInGame)
-                //c.AddObserver(instance);
         }
 
         public static Game Initialize(int CountTanks, int CountObstacles, int CountCartridges, int CountArtifacts)

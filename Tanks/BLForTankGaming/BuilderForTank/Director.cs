@@ -16,10 +16,8 @@ namespace BLForTankGame
 
         public void Construct()
         {
-            builder.BuildHealth();
             builder.BuildCartridge();
             builder.BuildStrategy();
-            builder.BuildState();
             builder.SetCoordX();
             builder.SetCoordY();
             builder.SetStartImage();
