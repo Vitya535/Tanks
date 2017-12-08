@@ -3,101 +3,94 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 
 namespace BLForTankGame
 {
     public class Game : IGame, IObserver// сущность игра, которая видит все на поле и что-то делает при определенных действиях в игре
     {
-        // возможно будет лучше другие контейнеры взять
-        public List<Tank> TanksInGame { get; private set; } // танки в игре
-        public List<Obstacles> ObstaclesInGame { get; private set; } // препятствия в игре
-        public List<Artifact> ArtifactsInGame { get; private set; } // артефакты в игре
-        public List<CartridgeOnField> CartridgeInGame { get; private set; }      
+        public List<Tank> TanksInGame { get; private set; } 
+        public List<IObjectsOnField> StaticObjectsInGame { get; private set; }
 
         private static Game instance;        
-        // при генерации поля добавлять обьекты не только на поле, но и как наблюдаемые обьекты
         private Game(int CountTanks, int CountObstacles, int CountCartridges, int CountArtifacts)
         {
-            Builder A = new AttackTankBuilder();
-            Builder D = new DefenseTankBuilder();
             Builder P = new BuilderForPlayerTank();
-            Director Att = new Director(A);
-            Director Def = new Director(D);
             Director Pl = new Director(P);
+            Builder D = new DefenseTankBuilder();
+            Director Def = new Director(D);
+            Builder A = new AttackTankBuilder();
+            Director Att = new Director(A);
+
+            StaticObjectsInGame = new List<IObjectsOnField>();
 
             Pl.Construct();
             Tank ForPlayer = P.GetResult();
             TanksInGame = new List<Tank>();
             TanksInGame.Add(ForPlayer);
-            Random rnd = new Random();
             for (int i = 0; i < CountTanks - 1; i++)
             {
-                switch (rnd.Next(1,3))
+                switch (Utils.GetRandom.Next(1,3))
                 {
                     case 1:
                         Def.Construct();
-                        TanksInGame.Add(D.GetResult());
+                        StaticObjectsInGame.Add(D.GetResult());
                         break;
                     case 2:
                         Att.Construct();
-                        TanksInGame.Add(A.GetResult());
+                        StaticObjectsInGame.Add(A.GetResult());
                         break;
                 }
             }
 
-            ObstaclesInGame = new List<Obstacles>();
             for (int i = 0; i < CountObstacles; i++)
             {
                 Obstacles MyObstacle = null;
-                switch (rnd.Next(1, 3))
+                switch (Utils.GetRandom.Next(1, 3))
                 {
                     case 1:
-                        MyObstacle = new UnDestructibleObstacle(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
+                        MyObstacle = new UnDestructibleObstacle(Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                     case 2:
-                        MyObstacle = new DestructibleObstacle(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
+                        MyObstacle = new DestructibleObstacle(Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                 }
-                ObstaclesInGame.Add(MyObstacle);
+                StaticObjectsInGame.Add(MyObstacle);
             }
 
-            ArtifactsInGame = new List<Artifact>();
             for (int i = 0; i < CountArtifacts; i++)
             {
                 Artifact MyArt = null;
-                switch (rnd.Next(1, 4))
+                switch (Utils.GetRandom.Next(1, 4))
                 {
                     case 1:
-                        MyArt = new RepairKit(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
+                        MyArt = new RepairKit(Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                     case 2:
-                        MyArt = new IncreaseDamage(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
+                        MyArt = new IncreaseDamage(Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                     case 3:
-                        MyArt = new IncreaseRange(rnd.Next(1, 26), rnd.Next(1, 26)); // рандомная или конкретная координата на поле
+                        MyArt = new IncreaseRange(Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26)); // рандомная или конкретная координата на поле
                         break;
                 }
-                ArtifactsInGame.Add(MyArt);
+                StaticObjectsInGame.Add(MyArt);
             }
 
-            CartridgeInGame = new List<CartridgeOnField>();
             for (int i = 0; i < CountCartridges; i++)
             {
                 CartridgeOnField MyCart = null;
-                switch (rnd.Next(1, 4))
+                switch (Utils.GetRandom.Next(1, 4))
                 {
                     case 1:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Light, 20, 4, rnd.Next(1, 26), rnd.Next(1, 26), ImagesForGame.GetLightShell);
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Light, 20, 4, Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26), ImagesForGame.GetLightShell);
                         break;
                     case 2:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Medium, 25, 4, rnd.Next(1, 26), rnd.Next(1, 26), ImagesForGame.GetMediumShell); 
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Medium, 25, 4, Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26), ImagesForGame.GetMediumShell); 
                         break;
                     case 3:
-                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Heavy, 30, 4, rnd.Next(1, 26), rnd.Next(1, 26), ImagesForGame.GetHeavyShell); 
+                        MyCart = new CartridgeOnField(Cartridge.TypeOfCartridges.Heavy, 30, 4, Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26), ImagesForGame.GetHeavyShell); 
                         break;
                 }
-                CartridgeInGame.Add(MyCart);
+                StaticObjectsInGame.Add(MyCart);
             }
         }
 

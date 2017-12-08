@@ -37,7 +37,7 @@ namespace BLForTankGame
         {
             health -= From.TankCartridge.Damage;
             if (health <= 0)
-                Game.ReturnInstance().ObstaclesInGame.Remove(this);
+                Game.ReturnInstance().StaticObjectsInGame.Remove(this);
         }
     }
 

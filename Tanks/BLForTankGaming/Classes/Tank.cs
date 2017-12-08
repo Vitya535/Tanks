@@ -98,9 +98,15 @@ namespace BLForTankGame
                 if (f is Artifact || f is CartridgeOnField || f is null)
                     x++;
                 if (f is CartridgeOnField)
+                {
                     TankCartridge = (CartridgeOnField)f;
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
+                }
                 if (f is Artifact)
+                {
                     GetArtifact((Artifact)f);
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
+                }
             }
         }
 
@@ -117,9 +123,15 @@ namespace BLForTankGame
                 if (f is Artifact || f is CartridgeOnField || f is null)
                     x--;
                 if (f is CartridgeOnField)
+                {
                     TankCartridge = (CartridgeOnField)f;
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
+                }
                 if (f is Artifact)
+                {
                     GetArtifact((Artifact)f);
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
+                }
             }
         }
 
@@ -136,9 +148,15 @@ namespace BLForTankGame
                 if (f is Artifact || f is CartridgeOnField || f is null)
                     y++;
                 if (f is CartridgeOnField)
+                {
                     TankCartridge = (CartridgeOnField)f;
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
+                }
                 if (f is Artifact)
+                {
                     GetArtifact((Artifact)f);
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
+                }
             }
         }
 
@@ -155,17 +173,23 @@ namespace BLForTankGame
                 if (f is Artifact || f is CartridgeOnField || f is null)
                     y--;
                 if (f is CartridgeOnField)
+                {
                     TankCartridge = (CartridgeOnField)f;
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
+                }
                 if (f is Artifact)
+                {
                     GetArtifact((Artifact)f);
+                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
+                }
             }
         }
 
         public void Shoot()
         {
+            IObjectsOnField obj = null;
             for (int i = 1; i <= TankCartridge.Range; i++)
             {
-                IObjectsOnField obj = null;
                 switch (direct)
                 {
                     case Direction.Up:
@@ -196,7 +220,7 @@ namespace BLForTankGame
         {
             To.health -= TankCartridge.Damage;
             if (To.health <= 0)
-                Game.ReturnInstance().TanksInGame.Remove(To);
+                Game.ReturnInstance().StaticObjectsInGame.Remove(To);
         }
 
         private void CauseDamageToObstacle(DestructibleObstacle To)

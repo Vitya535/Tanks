@@ -10,7 +10,6 @@ namespace BLForTankGame
     class DefenseTankBuilder : Builder
     {
         Tank product = new Tank();
-        //Random rnd1 = new Random();
 
         public override void BuildCartridge()
         {
@@ -24,12 +23,12 @@ namespace BLForTankGame
 
         public override void SetCoordX()
         {
-            product.Add(GetRndOne.Next(1, 26));
+            product.Add(Utils.GetRandom.Next(1, 26));
         }
 
         public override void SetCoordY()
         {
-            product.Add(GetRndOne.Next(1, 26));
+            product.Add(Utils.GetRandom.Next(1, 26));
         }
 
         public override void SetStartImage()

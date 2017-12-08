@@ -16,21 +16,24 @@ namespace FormForTanks
     {
         Bitmap bmp;
         Graphics g;
-        Pen MyPen = Pens.Black;
+        Pen MyPen;
         Game MyGame;
+        Tank Player;
         public FormForTanks()
         {
-            InitializeComponent();
+            InitializeComponent();         
             bmp = new Bitmap(PBForTanks.Width, PBForTanks.Height);
             g = Graphics.FromImage(bmp);
+            MyPen = Pens.Black;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             for (int i = 0; i <= 25; i++)
+            {
                 g.DrawLine(MyPen, new Point(20 * i, 0), new Point(20 * i, PBForTanks.Height));
-            for (int j = 0; j <= 25; j++)
-                g.DrawLine(MyPen, new Point(0, 20 * j), new Point(PBForTanks.Width, 20 * j));
+                g.DrawLine(MyPen, new Point(0, 20 * i), new Point(PBForTanks.Width, 20 * i));
+            }
             PBForTanks.Image = bmp;
         }
 
@@ -39,6 +42,7 @@ namespace FormForTanks
             MyGame = Game.Initialize(3, 20, 5, 3);
             Utils.DrawGame(MyGame, g);
             PBForTanks.Image = bmp;
+            Player = MyGame.TanksInGame[0];
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,22 +56,22 @@ namespace FormForTanks
             {
                 case Keys.W:
                 case Keys.Up:
-                    MyGame.TanksInGame[0].NotifyObserverForMoveUp();
+                    Player.NotifyObserverForMoveUp();
                     break;
                 case Keys.A:
                 case Keys.Left:
-                    MyGame.TanksInGame[0].NotifyObserverForMoveLeft();
+                    Player.NotifyObserverForMoveLeft();
                     break;
                 case Keys.S:
                 case Keys.Down:
-                    MyGame.TanksInGame[0].NotifyObserverForMoveDown();
+                    Player.NotifyObserverForMoveDown();
                     break;
                 case Keys.D:
                 case Keys.Right:
-                    MyGame.TanksInGame[0].NotifyObserverForMoveRight();
+                    Player.NotifyObserverForMoveRight();
                     break;
                 case Keys.Space:
-                    MyGame.TanksInGame[0].NotifyObserverForShoot();
+                    Player.NotifyObserverForShoot();
                     break;
             }
             g.Clear(Color.White);
