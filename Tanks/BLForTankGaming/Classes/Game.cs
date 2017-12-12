@@ -8,8 +8,8 @@ namespace BLForTankGame
 {
     public class Game : IGame, IObserver// сущность игра, которая видит все на поле и что-то делает при определенных действиях в игре
     {
-        public List<Tank> TanksInGame { get; private set; } 
         public List<IObjectsOnField> StaticObjectsInGame { get; private set; }
+        public List<IDamagable> DamagableObjectsInGame { get; private set; }
 
         private static Game instance;        
         private Game(int CountTanks, int CountObstacles, int CountCartridges, int CountArtifacts)
@@ -22,24 +22,28 @@ namespace BLForTankGame
             Director Att = new Director(A);
 
             StaticObjectsInGame = new List<IObjectsOnField>();
+            DamagableObjectsInGame = new List<IDamagable>();
 
             Pl.Construct();
             Tank ForPlayer = P.GetResult();
-            TanksInGame = new List<Tank>();
-            TanksInGame.Add(ForPlayer);
+            StaticObjectsInGame.Add(ForPlayer);
+            DamagableObjectsInGame.Add(ForPlayer);
+            Tank Bot = null;
             for (int i = 0; i < CountTanks - 1; i++)
             {
                 switch (Utils.GetRandom.Next(1,3))
                 {
                     case 1:
                         Def.Construct();
-                        StaticObjectsInGame.Add(D.GetResult());
+                        Bot = D.GetResult();
                         break;
                     case 2:
                         Att.Construct();
-                        StaticObjectsInGame.Add(A.GetResult());
+                        Bot = A.GetResult();
                         break;
                 }
+                StaticObjectsInGame.Add(Bot);
+                DamagableObjectsInGame.Add(Bot);
             }
 
             for (int i = 0; i < CountObstacles; i++)
@@ -52,6 +56,7 @@ namespace BLForTankGame
                         break;
                     case 2:
                         MyObstacle = new DestructibleObstacle(Utils.GetRandom.Next(1, 26), Utils.GetRandom.Next(1, 26)); // рандомная или конкретная координата на поле
+                        DamagableObjectsInGame.Add((IDamagable)MyObstacle);
                         break;
                 }
                 StaticObjectsInGame.Add(MyObstacle);
@@ -101,8 +106,13 @@ namespace BLForTankGame
 
         private void CreateObservers()
         {
-            foreach (Tank t in TanksInGame)
-                t.AddObserver(instance);
+            Tank Buf;
+            foreach (IObjectsOnField t in StaticObjectsInGame)
+                if (t is Tank)
+                {
+                    Buf = (Tank)t;
+                    Buf.AddObserver(instance);
+                }
         }
 
         public static Game Initialize(int CountTanks, int CountObstacles, int CountCartridges, int CountArtifacts)
@@ -113,24 +123,9 @@ namespace BLForTankGame
             return instance;
         }
 
-        public void UpdateMoveRight(Tank ob) // типа как делегат
+        public void UpdateMove(Tank ob, Tank.Direction dir)
         {
-            ob.MoveRight();
-        }
-
-        public void UpdateMoveLeft(Tank ob) // типа как делегат
-        {
-            ob.MoveLeft();
-        }
-
-        public void UpdateMoveUp(Tank ob) // типа как делегат
-        {
-            ob.MoveUp();
-        }
-
-        public void UpdateMoveDown(Tank ob) // типа как делегат
-        {
-            ob.MoveDown();
+            ob.Move(dir);
         }
 
         public void UpdateShoot(Tank ob) // типа как делегат

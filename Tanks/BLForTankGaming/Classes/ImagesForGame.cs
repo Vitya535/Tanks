@@ -30,6 +30,8 @@ namespace BLForTankGame
         private static readonly Image mediumShell = Image.FromFile("../../../Images/yellowShell.jpg");
         private static readonly Image heavyShell = Image.FromFile("../../../Images/blackShell.jpg");
 
+        private static readonly Image cartridge = Image.FromFile("../../../Images/TankCartridge.jpg");
+
         public static Image GetTankPlayerDown { get { return tankPlayerDown; } }
         public static Image GetTankPlayerUp { get { return tankPlayerUp; } }
         public static Image GetTankPlayerLeft { get { return tankPlayerLeft; } }
@@ -50,5 +52,7 @@ namespace BLForTankGame
         public static Image GetLightShell { get { return lightShell; } }
         public static Image GetMediumShell { get { return mediumShell; } }
         public static Image GetHeavyShell { get { return heavyShell; } }
+
+        public static Image GetCartridge { get { return cartridge; } }
     }
 }

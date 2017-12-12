@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BLForTankGame
 {
-    public interface IObservable
+    public interface IDamagable : IObjectsOnField
     {
-        void AddObserver(IObserver o);
+        int Health { get; set; }
     }
 }

@@ -7,15 +7,13 @@ using System.Drawing;
 
 namespace BLForTankGame
 {
-    public abstract class Obstacles : IObstaclesOnField
+    public abstract class Obstacles : IObjectsOnField
     {
         protected readonly int x; // возможно private
         protected readonly int y;  // возможно private
-        protected int health; // возможно private
         protected Image objectImage;  // возможно private
         public int GetX { get { return x; } }
         public int GetY { get { return y; } }
-        public int Health { get { return health; } }
         public Image ObjectImage { get { return objectImage; } }
 
         public Obstacles(int obstX, int obstY)
@@ -25,19 +23,14 @@ namespace BLForTankGame
         }
     }
 
-    public class DestructibleObstacle : Obstacles// класс разрушаемых препятствий
+    public class DestructibleObstacle : Obstacles, IDamagable// класс разрушаемых препятствий
     {
+        private int health = 100;
+        public int Health { get { return health; } set { health = value; } }
+
         public DestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
             objectImage = ImagesForGame.GetDestructObstacle;
-            health = 100;
-        }
-
-        public void TakeDamage(Tank From)
-        {
-            health -= From.TankCartridge.Damage;
-            if (health <= 0)
-                Game.ReturnInstance().StaticObjectsInGame.Remove(this);
         }
     }
 
@@ -46,7 +39,6 @@ namespace BLForTankGame
         public UnDestructibleObstacle(int obstX, int obstY) : base(obstX, obstY)
         {
             objectImage = ImagesForGame.GetUndestructObstacle;
-            health = 0;
         }
     }
 }

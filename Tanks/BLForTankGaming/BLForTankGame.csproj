@@ -50,12 +50,10 @@
     <Compile Include="Classes\Direction.cs" />
     <Compile Include="Classes\ImagesForGame.cs" />
     <Compile Include="Classes\Utils.cs" />
+    <Compile Include="Interfaces\IDamagable.cs" />
     <Compile Include="ObserverForGame\IObservable.cs" />
     <Compile Include="ObserverForGame\IObservableTank.cs" />
     <Compile Include="ObserverForGame\IObserver.cs" />
-    <Compile Include="StateForTank\StateAlive.cs" />
-    <Compile Include="StateForTank\StateBurn.cs" />
-    <Compile Include="StateForTank\StateOfTank.cs" />
     <Compile Include="StrategyForTank\AttackStrategy.cs" />
     <Compile Include="Classes\Cartridge.cs" />
     <Compile Include="StrategyForTank\DefenseStrategy.cs" />
@@ -64,7 +62,6 @@
     <Compile Include="Interfaces\ICartridges.cs" />
     <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\IObjectsOnField.cs" />
-    <Compile Include="Interfaces\IObstaclesOnField.cs" />
     <Compile Include="StrategyForTank\IStrategy.cs" />
     <Compile Include="Interfaces\ITanks.cs" />
     <Compile Include="Classes\Obstacle.cs" />

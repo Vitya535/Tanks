@@ -7,20 +7,19 @@ using System.Drawing;
 
 namespace BLForTankGame
 {
-    public partial class Tank : ITanks, IObservableTank // реализовать паттерн "Строитель", "Стратегия", "Состояние"
+    public partial class Tank : ITanks, IObservableTank, IDamagable // реализовать паттерн "Строитель", "Стратегия", "Состояние"
     {
         private int x;
         private int y;
         private Image image;
         private int health = 100;
-        private StateOfTank state = new StateAlive();
         public int GetX { get { return x; } }
         public int GetY { get { return y; } }
         public Image ObjectImage { get { return image; } }
         public int Health { get { return health; } set { health = value; } }
         public Cartridge TankCartridge { get; private set; }
         public IStrategy Strategy { private get; set; }
-        public StateOfTank State { get { return state; } set { state = value; } }
+        public Direction GetDirection { get { return direct; } } 
         Direction direct = Direction.Down;
         IObserver observer;
 
@@ -50,29 +49,9 @@ namespace BLForTankGame
             observer = o;
         }
 
-        public void RemoveObserver()
+        public void NotifyObserverForMove(Direction dir)
         {
-            observer = null;
-        }
-
-        public void NotifyObserverForMoveRight() // это событие для танка в наблюдателе
-        {
-            observer.UpdateMoveRight(this); // добавить в Update все что нужно
-        }
-
-        public void NotifyObserverForMoveLeft() // это событие для танка в наблюдателе
-        {
-            observer.UpdateMoveLeft(this); // добавить в Update все что нужно
-        }
-
-        public void NotifyObserverForMoveDown() // это событие для танка в наблюдателе
-        {
-            observer.UpdateMoveDown(this); // добавить в Update все что нужно
-        }
-
-        public void NotifyObserverForMoveUp() // это событие для танка в наблюдателе
-        {
-            observer.UpdateMoveUp(this); // добавить в Update все что нужно
+            observer.UpdateMove(this, dir);
         }
 
         public void NotifyObserverForShoot()
@@ -80,108 +59,83 @@ namespace BLForTankGame
             observer.UpdateShoot(this);
         }
 
-        public void GetArtifact(Artifact art)
+        private void GetArtifact(Artifact art)
         {
             art.CauseEffect(this);
         }
 
-        public void MoveRight() // перемещение танка
+        private void TakeCartridgeOrArtifact(IObjectsOnField Object)
         {
-            if (Strategy is StrategyForPlayer)
-                image = ImagesForGame.GetTankPlayerRight;
-            else
-                image = ImagesForGame.GetTankAIRight;
-            direct = Direction.Right;
-            if (x < 24)
+            if (Object is CartridgeOnField)
             {
-                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x + 1, y);
-                if (f is Artifact || f is CartridgeOnField || f is null)
-                    x++;
-                if (f is CartridgeOnField)
-                {
-                    TankCartridge = (CartridgeOnField)f;
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
-                }
-                if (f is Artifact)
-                {
-                    GetArtifact((Artifact)f);
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
-                }
+                TankCartridge = (CartridgeOnField)Object;
+                Game.ReturnInstance().StaticObjectsInGame.Remove(Object);
+            }
+            else if (Object is Artifact)
+            {
+                GetArtifact((Artifact)Object);
+                Game.ReturnInstance().StaticObjectsInGame.Remove(Object);
             }
         }
 
-        public void MoveLeft() // перемещение танка
+        public void Move(Direction Path)
         {
-            if (Strategy is StrategyForPlayer)
-                image = ImagesForGame.GetTankPlayerLeft;
-            else
-                image = ImagesForGame.GetTankAILeft;
-            direct = Direction.Left;
-            if (x > 0)
+            direct = Path;
+            IObjectsOnField f;
+            switch (Path)
             {
-                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x - 1, y);
-                if (f is Artifact || f is CartridgeOnField || f is null)
-                    x--;
-                if (f is CartridgeOnField)
-                {
-                    TankCartridge = (CartridgeOnField)f;
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
-                }
-                if (f is Artifact)
-                {
-                    GetArtifact((Artifact)f);
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
-                }
-            }
-        }
-
-        public void MoveDown() // перемещение танка
-        {
-            if (Strategy is StrategyForPlayer)
-                image = ImagesForGame.GetTankPlayerDown;
-            else
-                image = ImagesForGame.GetTankAIDown;
-            direct = Direction.Down;
-            if (y < 24)
-            {
-                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x, y + 1);
-                if (f is Artifact || f is CartridgeOnField || f is null)
-                    y++;
-                if (f is CartridgeOnField)
-                {
-                    TankCartridge = (CartridgeOnField)f;
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
-                }
-                if (f is Artifact)
-                {
-                    GetArtifact((Artifact)f);
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
-                }
-            }
-        }
-
-        public void MoveUp() // перемещение танка
-        {
-            if (Strategy is StrategyForPlayer)
-                image = ImagesForGame.GetTankPlayerUp;
-            else
-                image = ImagesForGame.GetTankAIUp;
-            direct = Direction.Up;
-            if (y > 0)
-            {
-                IObjectsOnField f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x, y - 1);
-                if (f is Artifact || f is CartridgeOnField || f is null)
-                    y--;
-                if (f is CartridgeOnField)
-                {
-                    TankCartridge = (CartridgeOnField)f;
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((CartridgeOnField)f);
-                }
-                if (f is Artifact)
-                {
-                    GetArtifact((Artifact)f);
-                    Game.ReturnInstance().StaticObjectsInGame.Remove((Artifact)f);
-                }
+                case Direction.Down:
+                    if (Strategy is StrategyForPlayer)
+                        image = ImagesForGame.GetTankPlayerDown;
+                    else
+                        image = ImagesForGame.GetTankAIDown;
+                    if (y < 24)
+                    {
+                        f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x, y + 1);
+                        if (f is Artifact || f is CartridgeOnField || f is null)
+                            y++;
+                        TakeCartridgeOrArtifact(f);
+                    }
+                    break;
+                case Direction.Left:
+                    if (Strategy is StrategyForPlayer)
+                        image = ImagesForGame.GetTankPlayerLeft;
+                    else
+                        image = ImagesForGame.GetTankAILeft;
+                    if (x > 0)
+                    {
+                        f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x - 1, y);
+                        if (f is Artifact || f is CartridgeOnField || f is null)
+                            x--;
+                        TakeCartridgeOrArtifact(f);
+                    }
+                    break;
+                case Direction.Up:
+                    if (Strategy is StrategyForPlayer)
+                        image = ImagesForGame.GetTankPlayerUp;
+                    else
+                        image = ImagesForGame.GetTankAIUp;
+                    if (y > 0)
+                    {
+                        f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x, y - 1);
+                        if (f is Artifact || f is CartridgeOnField || f is null)
+                            y--;
+                        TakeCartridgeOrArtifact(f);
+                    }
+                    break;
+                case Direction.Right:
+                    if (Strategy is StrategyForPlayer)
+                        image = ImagesForGame.GetTankPlayerRight;
+                    else
+                        image = ImagesForGame.GetTankAIRight;
+                    if (x < 24)
+                    {
+                        f = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), x + 1, y);
+                        if (f is Artifact || f is CartridgeOnField || f is null)
+                            x++;
+                        TakeCartridgeOrArtifact(f);
+                    }
+                    break;
             }
         }
 
@@ -205,27 +159,26 @@ namespace BLForTankGame
                         obj = Utils.FindObjectOnNearbyCell(Game.ReturnInstance(), GetX + i, GetY);
                         break;
                 }
-                if (obj is Tank || obj is DestructibleObstacle)
+                if (obj == null)
+                    continue;
+                else if (obj is IDamagable)
                 {
-                    if (obj is Tank)
-                        CauseDamageToTank((Tank)obj);
-                    if (obj is DestructibleObstacle)
-                        CauseDamageToObstacle((DestructibleObstacle)obj);
+                    CauseDamage((IDamagable)obj);
                     break;
                 }
+                else
+                    break;
             }
         }
 
-        private void CauseDamageToTank(Tank To)
+        private void CauseDamage(IDamagable To)
         {
-            To.health -= TankCartridge.Damage;
-            if (To.health <= 0)
+            To.Health -= TankCartridge.Damage;
+            if (To.Health <= 0)
+            {
                 Game.ReturnInstance().StaticObjectsInGame.Remove(To);
-        }
-
-        private void CauseDamageToObstacle(DestructibleObstacle To)
-        {
-            To.TakeDamage(this);
+                Game.ReturnInstance().DamagableObjectsInGame.Remove(To);
+            }
         }
     }
 }

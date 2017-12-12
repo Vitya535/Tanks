@@ -21,7 +21,7 @@ namespace FormForTanks
         Tank Player;
         public FormForTanks()
         {
-            InitializeComponent();         
+            InitializeComponent();
             bmp = new Bitmap(PBForTanks.Width, PBForTanks.Height);
             g = Graphics.FromImage(bmp);
             MyPen = Pens.Black;
@@ -42,7 +42,7 @@ namespace FormForTanks
             MyGame = Game.Initialize(3, 20, 5, 3);
             Utils.DrawGame(MyGame, g);
             PBForTanks.Image = bmp;
-            Player = MyGame.TanksInGame[0];
+            Player = (Tank)MyGame.StaticObjectsInGame[0];
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,19 +56,19 @@ namespace FormForTanks
             {
                 case Keys.W:
                 case Keys.Up:
-                    Player.NotifyObserverForMoveUp();
+                    Player.NotifyObserverForMove(Tank.Direction.Up);
                     break;
                 case Keys.A:
                 case Keys.Left:
-                    Player.NotifyObserverForMoveLeft();
+                    Player.NotifyObserverForMove(Tank.Direction.Left);
                     break;
                 case Keys.S:
                 case Keys.Down:
-                    Player.NotifyObserverForMoveDown();
+                    Player.NotifyObserverForMove(Tank.Direction.Down);
                     break;
                 case Keys.D:
                 case Keys.Right:
-                    Player.NotifyObserverForMoveRight();
+                    Player.NotifyObserverForMove(Tank.Direction.Right);
                     break;
                 case Keys.Space:
                     Player.NotifyObserverForShoot();
@@ -78,8 +78,6 @@ namespace FormForTanks
             Form1_Load(sender, e);
             Utils.DrawGame(MyGame, g);
             PBForTanks.Image = bmp;
-            g.Dispose();
-            g = Graphics.FromImage(bmp);
         }
     }
 }

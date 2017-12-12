@@ -35,8 +35,10 @@
             this.loadGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PBForShoot = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PBForTanks)).BeginInit();
             this.MSForTanks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBForShoot)).BeginInit();
             this.SuspendLayout();
             // 
             // PBForTanks
@@ -94,11 +96,22 @@
             this.pauseToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.pauseToolStripMenuItem.Text = "Pause";
             // 
+            // PBForShoot
+            // 
+            this.PBForShoot.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.PBForShoot.Location = new System.Drawing.Point(12, 27);
+            this.PBForShoot.Name = "PBForShoot";
+            this.PBForShoot.Size = new System.Drawing.Size(20, 20);
+            this.PBForShoot.TabIndex = 2;
+            this.PBForShoot.TabStop = false;
+            this.PBForShoot.Visible = false;
+            // 
             // FormForTanks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 537);
+            this.Controls.Add(this.PBForShoot);
             this.Controls.Add(this.PBForTanks);
             this.Controls.Add(this.MSForTanks);
             this.MainMenuStrip = this.MSForTanks;
@@ -109,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PBForTanks)).EndInit();
             this.MSForTanks.ResumeLayout(false);
             this.MSForTanks.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBForShoot)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,6 +137,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
+        private System.Windows.Forms.PictureBox PBForShoot;
     }
 }
 

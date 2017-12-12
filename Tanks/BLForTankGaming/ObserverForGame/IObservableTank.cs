@@ -8,10 +8,7 @@ namespace BLForTankGame
 {
     interface IObservableTank : IObservable
     {
-        void NotifyObserverForMoveRight();
-        void NotifyObserverForMoveLeft();
-        void NotifyObserverForMoveDown();
-        void NotifyObserverForMoveUp();
+        void NotifyObserverForMove(Tank.Direction dir);
         void NotifyObserverForShoot();
     }
 }

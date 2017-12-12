@@ -9,6 +9,6 @@ namespace BLForTankGame
     public interface IGame
     {
         List<IObjectsOnField> StaticObjectsInGame { get; }
-        List<Tank> TanksInGame { get; }
+        List<IDamagable> DamagableObjectsInGame { get; }
     }
 }
